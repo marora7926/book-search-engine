@@ -7,15 +7,21 @@ import Auth from '../utils/auth';
 
 
 const LoginForm = () => {
-  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [userFormData, setUserFormData] = useState({ 
+    email: '', 
+    password: '' 
+  });
+  
+  // set state for form validation
   const [validated] = useState(false);
+
+  // set state for alert
   const [showAlert, setShowAlert] = useState(false);
   const [login, { error, data }] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     setUserFormData({ 
       ...userFormData, 
       [name]: value,
