@@ -3,7 +3,12 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 import Auth from '../utils/auth';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
-import { ADD_BOOK } from '../../utils/mutations';
+import { ADD_BOOK } from '../utils/mutations';
+
+// Google books API (Third-party API), taken from original code provide in API.js
+const searchGoogleBooks = (query) => {
+  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+};
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -13,6 +18,8 @@ const SearchBooks = () => {
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+
+  const [saveBook, {error}] = useMutation( ADD_BOOK );
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -65,23 +72,17 @@ const SearchBooks = () => {
     }
 
     try {
-      const data = await saveBook({
+      const {authors, description, title, bookId, image} = {...bookToSave};
+
+      await saveBook({
         variables: { 
-          profileId, 
-          skill },
+        authors, 
+        description: description || 'No Description', 
+        title, 
+        bookId, 
+        image: image || 'No Image',
+        link: `https://books.google.com/ebooks?id=${bookId}` },
       });
-
-      setSkill('');
-    } catch (err) {
-      console.error(err);
-    }
-    
-    try {
-      const response = await saveBook(bookToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
 
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
