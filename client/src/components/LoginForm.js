@@ -5,7 +5,6 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ 
     email: '', 
@@ -14,9 +13,9 @@ const LoginForm = () => {
   
   // set state for form validation
   const [validated] = useState(false);
-
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
+  
   const [login] = useMutation(LOGIN_USER);
 
   // update state based on form input changes

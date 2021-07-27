@@ -74,7 +74,7 @@ const SearchBooks = () => {
     try {
       const {authors, description, title, bookId, image} = {...bookToSave};
 
-      await saveBook({
+      await add({
         variables: { 
         authors, 
         description: description || 'No Description', 
