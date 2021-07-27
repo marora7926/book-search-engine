@@ -19,7 +19,7 @@ type User {
     savedBooks: [Book]
 }
 
-input savedBook {
+input BookInput {
     description: String
     title: String
     bookId: String
