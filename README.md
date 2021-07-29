@@ -67,7 +67,5 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 ## Repo link
 [Book Search Engine](https://github.com/marora7926/book-search-engine)
 
-Deploy your application to Heroku with a MongoDB database using MongoDB Atlas. Use the [Deploy with Heroku and MongoDB Atlas](https://coding-boot-camp.github.io/full-stack/mongodb/deploy-with-heroku-and-mongodb-atlas) walkthrough for instructions.
-
 ---
 © 2021 Mohit Arora. All Rights Reserved.
