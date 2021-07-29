@@ -62,11 +62,13 @@ const resolvers = {
 
     // Set up mutation so a logged in user can only remove their books and no one else's
     removeBook: async (parent, args, context) => {
+      console.log (args, context)
       if(context.user) {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { savedBooks: { bookId: args.bookId } } },
           { new: true }
+
         );
         return updatedUser;
       }
